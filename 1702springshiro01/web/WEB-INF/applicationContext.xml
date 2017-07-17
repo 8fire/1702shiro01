@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:component-scan base-package="com.qianfeng"></context:component-scan>
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+               <property name="supportedMediaTypes">
+                   <list>
+                       <value>
+                           text/html;charset=utf-8
+                       </value>
+                       <value>
+                           application/json
+                       </value>
+                   </list>
+               </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/"></property>
+    <property name="suffix" value=".jsp"></property>
+</bean>
+    <bean id="ds" class="com.alibaba.druid.pool.DruidDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+    <property name="url" value="jdbc:mysql://localhost:3306/shiro"></property>
+    <property name="username" value="root"></property>
+    <property name="password" value="123456"></property>
+</bean>
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="ds" ></property>
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:com/qianfeng/mapper/*.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!--域-->
+    <bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+        <property name="dataSource" ref="ds"></property>
+        <property name="permissionsLookupEnabled" value="true"></property>
+        <!--这个登录-->
+        <property name="authenticationQuery" value="select  pwd from users where account=?"></property>
+        <!--这个是用户角色查询-->
+        <property name="userRolesQuery" value="select rname from user_role left join role using(rid) left join users using (uid) where account=?"></property>
+       <!--权限查询-->
+        <property name="permissionsQuery" value="select prename from role_pression left join role using(rid) left join pression using(preid) where rname=?"></property>
+    </bean>
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"></bean>
+   <!--配置安全管理器-->
+    <bean id="defaultWebSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="jdbcRealm"></property>
+        <property name="cacheManager" ref="cacheManager"></property>
+    </bean>
+    <!--shiro过滤器-->
+    <bean id="shiro" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="defaultWebSecurityManager"></property>
+        <property name="loginUrl" value="/error.jsp"></property>
+        <!--无权访问跳转到的页面-->
+        <property name="unauthorizedUrl" value="/toNoqx.do"></property>
+        <property name="filterChainDefinitions">
+            <value>
+
+                /**=anon
+            </value>
+        </property>
+    </bean>
+    <!--shiro生命周期处理器-->
+    <!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor" />
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="defaultWebSecurityManager" />
+    </bean>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+    <!--异常处理类-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">
+                    redirect:/error.jsp
+                </prop>
+                <prop key="org.apache.shiro.authc.UnknownAccountException">
+                    redirect:/nousers.jsp
+                </prop>
+                <prop key="org.apache.shiro.authc.IncorrectCredentialsException">
+                    redirect:/error.jsp
+                </prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.qianfeng.dao"></property>
+    </bean>
+</beans>

@@ -1,0 +1,56 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="1702springshiro01:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/1702springshiro01_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="1702springshiro01/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="1702springshiro01" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring MVC-4.3.9.RELEASE" />
+          <element id="library" level="project" name="Spring-4.3.9.RELEASE" />
+          <element id="library" level="project" name="mysql-connector-java-5.1.24-bin" />
+          <element id="library" level="project" name="druid-1.0.28" />
+          <element id="library" level="project" name="commons-beanutils-1.9.3" />
+          <element id="library" level="project" name="commons-logging-1.2" />
+          <element id="library" level="project" name="log4j-1.2.17" />
+          <element id="library" level="project" name="slf4j-log4j12-1.7.24" />
+          <element id="library" level="project" name="slf4j-api-1.7.24" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/fastjson-1.2.32.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/mybatis-3.4.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/mybatis-spring-1.3.1.jar" />
+          <element id="library" level="project" name="shiro-all-1.3.2" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/commons-beanutils-1.9.3.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-expression-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/druid-1.0.28.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-core-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-jms-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-aop-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-oxm-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-messaging-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-jdbc-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-orm-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-instrument-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-context-support-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-instrument-tomcat-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-test-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-tx-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-context-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-beans-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-webmvc-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-webmvc-portlet-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-websocket-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-web-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/spring-aspects-4.3.9.RELEASE.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/aopalliance-1.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/commons-logging-1.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/slf4j-log4j12-1.7.24.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/slf4j-api-1.7.24.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/shiro-all-1.3.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/1702springshiro01/lib/log4j-1.2.17.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

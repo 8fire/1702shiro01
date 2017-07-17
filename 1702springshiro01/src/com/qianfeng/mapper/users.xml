@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.dao.UsersDao">
+    <select id="selectUersByAccount" resultType="com.qianfeng.bean.Users">
+        SELECT * from users where account=#{account}
+    </select>
+    <select id="usersCount" resultType="java.lang.Integer" >
+        SELECT count(*) from users u LEFT JOIN dakarecord d on u.uid=d.uid where d.flag=1
+    </select>
+    <!--<resultMap id="m6" type="com.qianfeng.bean.Users">
+    <result column="a" property="account"></result>
+    <collection property="dakeRecord" ofType="com.qianfeng.bean.DakeRecord">
+        <result property="dakatime" column="b"></result>
+        <result property="dakastate" column="c"></result>
+    </collection>
+</resultMap>-->
+    <resultMap id="m6" type="com.qianfeng.bean.DakeRecord">
+        <result property="id" column="id"></result>
+        <result property="dakatime" column="b"></result>
+        <result property="dakastate" column="c"></result>
+        <association property="users" javaType="com.qianfeng.bean.Users">
+            <result column="a" property="account"></result>
+            <result column="uid" property="uid"></result>
+        </association>
+    </resultMap>
+    <select id="selectByUsers" resultMap="m6">
+        SELECT u.uid, u.account as a,d.id,d.dakatime as b ,d.dakastate as c from users u LEFT JOIN dakarecord d on u.uid=d.uid where d.flag=1 limit #{start},#{size}
+    </select>
+   <select id="selectById" resultMap="m6">
+        SELECT u.uid, u.account as a,d.id,d.dakatime as b,d.dakastate as c from users u LEFT JOIN dakarecord d on u.uid=d.uid where d.flag=1 AND u.uid=#{uid}
+    </select>
+   <insert id="daKa" useGeneratedKeys="true" keyProperty="id" parameterType="map">
+        INSERT into dakarecord (dakatime,flag,uid,dakastate) VALUES (#{dakatime},#{flag},#{uid},#{dakastate})
+    </insert>
+    <delete id="removeDakaRecode" parameterType="list" >
+        delete from dakarecord where id in
+        <foreach collection="list" open="(" item="x" separator=","   close=")">
+            #{x}
+        </foreach>
+    </delete>
+    <!--每天只能签到一次-->
+    <select id="dakaCount" resultType="java.lang.Integer" >
+        select COUNT(*) from dakarecord  where to_days(dakatime) = to_days(#{dakatime}) AND uid=#{uid}
+    </select>
+</mapper>
